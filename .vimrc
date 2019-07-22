@@ -258,17 +258,11 @@ nnoremap <leader>g :Ggrep
 vnoremap <leader>g y:Ggrep '<C-R>"'<CR>
 nnoremap <leader>l :Twiggy<CR>
 
-
-" Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down one entire line. with line wrapping on, this can cause the cursor to
-" actually skip a few lines on the screen because it's moving from line N to line N+1 in the file. I want this to act more visually -- I want `down' to
-" mean the next line on the screen
 nmap j gj
 nmap k gk
 
-" Edit .vimrc
 map <leader>vl :vsp $MYVIMRC<CR>
 map <leader>vr :source $MYVIMRC<CR>
-nnoremap <Leader>pi :PlugInstall<CR>
 
 nnoremap <Leader>w :w<CR>
 nnoremap Q q
@@ -331,16 +325,11 @@ let NERDTreeDirArrows = 1
 " auto close nerdtree if it is last window in tab
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" NERDTree end
-
-" Gitgutter settings
 let g:gitgutter_terminal_reports_focus=0
 let g:gitgutter_override_sign_column_highlight = 0
 
-" Rooter
 let g:rooter_patterns = ['tags', '.git', '.git/']
 
-" Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{FugitiveStatusline()}
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -350,21 +339,16 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-" Syntastic end
 
-" search visually selected text
 vnoremap // y/<C-R>"<CR>
 
 autocmd QuickFixCmdPost *grep* cwindow
 
-" Git branching
 let g:twiggy_local_branch_sort = 'mru'
 let g:twiggy_remote_branch_sort = 'date'
 
-" Easy motion
 map <Leader>j <Plug>(easymotion-s)
 
-" Docker
 nmap <Leader>d :DockerToolsToggle<CR>
 nmap <Leader>dcu :DCup<CR>
 nmap <Leader>dcs :DCstop<CR>
@@ -374,11 +358,6 @@ nmap <Leader>dcp :DCps<CR>
 nnoremap <leader>cn :cn<CR>
 nnoremap <leader>cp :cp<CR>
 nnoremap <leader>c :ccl<CR>
-
-nmap <Leader>n :echo @%<CR>
-
-" show error if string is longer than 160 chars
-:match ErrorMsg '\%>160v.\+'
 
 " remove trailing spaces
 function! <SID>StripTrailingWhitespaces()
@@ -395,25 +374,9 @@ endfunction
 autocmd BufWritePre *.rb :call <SID>StripTrailingWhitespaces()
 autocmd BufWritePre *.py :call <SID>StripTrailingWhitespaces()
 
-nmap <Leader>v <C-w>v
-" tmp
 nmap <Leader>q :set paste!<CR>
 
 let g:deoplete#enable_at_startup = 1
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
-if has('macunix')
-  " pbcopy for OSX copy/paste
-  vmap <C-x> :!pbcopy<CR>
-  vmap <C-c> :w !pbcopy<CR><CR>
-endif
-
-nmap <Leader>db :DB postgresql://postgres@localhost/edtech_development 
